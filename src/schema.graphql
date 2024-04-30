@@ -1,0 +1,44 @@
+
+type UpdatedData {
+    user: String!,
+    action: String!,
+    actionType: String!,
+    description: String!,
+}
+
+type UpdatedMeta {
+    ipAddress: String!,
+    userAgent: String!,
+    origin: String!,
+    timestamp: String!
+}
+
+type Author {
+    _id: ID!,
+    authorName: String!,
+    createdAt: String!,
+    lastUpdatedData: UpdatedData!,
+    lastUpdatedMeta: UpdatedMeta!,
+}
+
+type Book {
+    _id: ID!,
+    title: String!,
+    publisher: String!,
+    author: ID!,
+    createdAt: String!,
+    lastUpdatedData: UpdatedData!,
+    lastUpdatedMeta: UpdatedMeta!,
+}
+
+type Query{
+  authors: [Author]
+  books: [Book]
+  getBook(id: ID!): Book
+  getAuthor(id: ID!): Author
+}
+
+type Mutation {
+  createAuthor(authorName: String!): Boolean
+  createBook(title: String!, publisher: String!, authorID: String!): Boolean
+}
