@@ -27,10 +27,10 @@ export const SchemaResolvers = {
                 publisher: publisher,
                 author: authorId,
                 lastUpdatedData: {
-                    user: 'test-user-1',
+                    user: '66304704242179c8c025d181',
                     action: 'create:books',
                     actionType: 'create',
-                    description: 'User created a new Book'
+                    description: 'User created a new book'
                 },
                 lastUpdatedMeta: {
                     ipAddress: '1.1.1.1',
@@ -39,6 +39,29 @@ export const SchemaResolvers = {
                     timestamp: timestamp,
                 },
                 createdAt: timestamp
+            })
+            return true;
+        },
+        updateBook:  async (_: any, { id, title, publisher }: any, ___: any, ____: any) => {
+            const timestamp = new Date();
+            await BookModel.findByIdAndUpdate({_id: id}, {
+                ...(title ? { title: title } : {}),
+                ...(publisher ? { publisher: publisher } : {}),
+                ...({
+                    lastUpdatedData: {
+                        user: '66304704242179c8c025d183',
+                        action: 'update:books',
+                        actionType: 'update',
+                        description: 'User updated the book',
+
+                    },
+                    lastUpdatedMeta: {
+                        ipAddress: '1.2.3.4',
+                        userAgent: 'something else like gecko',
+                        origin: 'localhost:2',
+                        timestamp: timestamp,
+                    }
+                })
             })
             return true;
         },
@@ -47,10 +70,10 @@ export const SchemaResolvers = {
             await AuthorModel.insertMany({
                 authorName: authorName,
                 lastUpdatedData: {
-                    user: 'test-user-2',
+                    user: '66304704242179c8c025d185',
                     action: 'create:authors',
                     actionType: 'create',
-                    description: 'User created a new Book'
+                    description: 'User created a new author'
                 },
                 lastUpdatedMeta: {
                     ipAddress: '1.1.1.1',
@@ -62,5 +85,25 @@ export const SchemaResolvers = {
             })
             return true;
         },
+        updateAuthor: async (_: any, { id, authorName }: any, ___: any, ____: any) => {
+            const timestamp = new Date();
+            await AuthorModel.findByIdAndUpdate({_id: id}, {
+                authorName: authorName,
+                lastUpdatedData: {
+                    user: '6630d9989520209c21e02692',
+                    action: 'update:authors',
+                    actionType: 'update',
+                    description: 'User updated the author',
+
+                },
+                lastUpdatedMeta: {
+                    ipAddress: '1.2.3.4',
+                    userAgent: 'Something else like gecko',
+                    origin: 'localhost:2',
+                    timestamp: timestamp,
+                }
+            })
+            return true;
+        }
     }
 }

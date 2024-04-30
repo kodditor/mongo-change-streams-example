@@ -1,37 +1,43 @@
 import { Schema, SchemaTypes, model } from "mongoose";
 import { ActionTypesEnum, ActionsEnum } from ".";
 
-export const AuthorSchema = new Schema({
+export const LogSchema = new Schema({
     _id: {
         type: SchemaTypes.ObjectId,
     },
-    authorName: {
+    item: {
+        type: SchemaTypes.ObjectId,
+        required: true,     
+    },
+    itemType: {
         type: SchemaTypes.String,
         required: true,
     },
-    createdAt: {
-        type: SchemaTypes.Date,
+    action: {
+        type: SchemaTypes.String,
+        enum: ActionsEnum,
+    },
+    actionType: {
+        type: SchemaTypes.String,
+        enum: ActionTypesEnum,
         required: true,
     },
-    lastUpdatedData: new Schema({
-        user: {
-            type: SchemaTypes.ObjectId,
-            required: true,
-        },
-        action: {
-            type: SchemaTypes.String,
-            enum: ActionsEnum,
-        },
-        actionType: {
-            type: SchemaTypes.String,
-            enum: ActionTypesEnum,
-            required: true,
-        },
-        description: {
-            type: SchemaTypes.String,
-            required: true,
-        },
-    }),
+    operationType: {
+        type: SchemaTypes.String,
+        required: true,
+    },
+    user: {
+        type: SchemaTypes.ObjectId,
+        required: true,
+    },
+    changes: {
+        type: SchemaTypes.Mixed,
+        default: null
+    },
+    description: {
+        type: SchemaTypes.String,
+        required: true,
+    },
     lastUpdatedMeta: new Schema({
         ipAddress: {
             type: SchemaTypes.String,
@@ -51,4 +57,5 @@ export const AuthorSchema = new Schema({
         }
     })
 })
-export const AuthorModel = model('authors', AuthorSchema);
+
+export const LogModel = model('logs', LogSchema);

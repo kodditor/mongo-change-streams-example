@@ -40,5 +40,7 @@ type Query{
 
 type Mutation {
   createAuthor(authorName: String!): Boolean
-  createBook(title: String!, publisher: String!, authorID: String!): Boolean
+  updateAuthor(id: ID!,authorName: String!): Boolean
+  createBook(title: String!, publisher: String!, authorId: String!): Boolean
+  updateBook(id: ID!, title: String, publisher:String): Boolean
 }
