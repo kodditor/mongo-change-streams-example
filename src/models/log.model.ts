@@ -34,6 +34,9 @@ export const LogSchema = new Schema({
         type: SchemaTypes.Mixed,
         default: null
     },
+    createdAt: {
+      type: SchemaTypes.Date,
+    },
     description: {
         type: SchemaTypes.String,
         required: true,
@@ -54,7 +57,11 @@ export const LogSchema = new Schema({
         timestamp: {
             type: SchemaTypes.Date,
             required: true,
-        }
+        },
+        resumeToken: {
+            type: SchemaTypes.Mixed,
+            required: true,
+        },
     })
 })
 
