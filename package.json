@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "loadtest": "k6 run --vus 1000 --duration 60s src/loadTest.js"
   },
   "keywords": [],
   "author": "",
@@ -17,11 +18,13 @@
     "dotenv": "^16.4.5",
     "fastify": "^4.26.2",
     "graphql": "^16.8.1",
+    "k6": "^0.0.0",
     "mongoose": "^8.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7"
+    "@types/node": "^20.12.7",
+    "@types/uuid": "^9.0.8"
   }
 }
